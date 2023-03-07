@@ -56,4 +56,5 @@ async = ["futures", "tokio"]
 elastic = ["elasticsearch", "async", "openssl"]
 unstable = ["elastic"]
 tui = ["indicatif"]
-default = ["tui"]
+
+default = ["tui", "unstable"]

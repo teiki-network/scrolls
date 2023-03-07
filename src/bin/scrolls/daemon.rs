@@ -61,7 +61,7 @@ impl ConfigRoot {
         }
 
         // finally, we use env vars to make some last-step overrides
-        s = s.add_source(config::Environment::with_prefix("SCROLLS").separator("_"));
+        s = s.add_source(config::Environment::with_prefix("SCROLLS").separator("__"));
 
         s.build()?.try_deserialize()
     }
