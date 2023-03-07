@@ -1,23 +1,32 @@
-[source]
-type = "N2N"
-address = "relays-new.cardano-mainnet.iohk.io:3001"
-
-[[reducers]]
-type = "AddressByAsset"
-key_prefix = "AddressByAdaHandle"
-policy_id_hex = "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a"
-convert_to_ascii = true
-
-[storage]
-type = "Redis"
-connection_params = "redis://redis:6379"
-
 [chain]
 type = "Mainnet"
 
+[source]
+type = "N2C"
+min_depth = 10
+
+[storage]
+type = "Redis"
+cursor_key = "s:_c"
+
+[enrich]
+type = "Sled"
+db_path = "/opt/scrolls/sled_db"
+
+[[reducers]]
+type = "AdaHandle"
+key_prefix_handle_to_address = "s:ha"
+key_prefix_address_to_handles = "s:ah"
+policy_id_hex = "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a"
+
 [intersect]
+# 1 Block before Genesis
+# https://cexplorer.io/asset/asset10wl5q5grkgy2g540djqzw4fn9qqcqn9zg87gz6/mint#data
 type = "Point"
 value = [
-    76066702,
-    "9e1a6284f0ff3bd59cabb2eac9feef4acefe8cd10c5b63825dfdea79f65bfcea",
+  47931310,
+  "89f93419845d5f6ce8040fd5eeedda93d764c8569f7c2cc6802a8429a0da877b",
 ]
+
+[policy]
+missing_data = "Skip"
